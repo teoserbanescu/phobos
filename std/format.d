@@ -3621,22 +3621,25 @@ if (is(StringTypeOf!T) && !is(T == enum))
     {
         try
         {
-            // ignore other specifications and quote
-            for (size_t i = 0; i < str.length; )
-            {
-                auto c = decode(str, i);
-                // \uFFFE and \uFFFF are considered valid by isValidDchar,
-                // so need checking for interchange.
-                if (c == 0xFFFE || c == 0xFFFF)
-                    goto LinvalidSeq;
-            }
             put(w, '\"');
-            for (size_t i = 0; i < str.length; )
-            {
-                auto c = decode(str, i);
-                formatChar(w, c, '"');
-            }
+            formatRange(w, str, f);
             put(w, '\"');
+            //// ignore other specifications and quote
+            //for (size_t i = 0; i < str.length; )
+            //{
+            //    auto c = decode(str, i);
+            //    // \uFFFE and \uFFFF are considered valid by isValidDchar,
+            //    // so need checking for interchange.
+            //    if (c == 0xFFFE || c == 0xFFFF)
+            //        goto LinvalidSeq;
+            //}
+            //put(w, '\"');
+            //for (size_t i = 0; i < str.length; )
+            //{
+            //    auto c = decode(str, i);
+            //    formatChar(w, c, '"');
+            //}
+            //put(w, '\"');
             return;
         }
         catch (UTFException)
