@@ -2009,7 +2009,7 @@ void formatValue(Writer, T, Char)(auto ref Writer w, auto ref T val, scope const
     auto aa = ["H":"W"];
     formatValue(w, aa, spec);
 
-    assert(w.data == "[\"H\":\"W\"]", w.data);
+    assert(w.data == "[H:W]", w.data);
 }
 
 /// `enum`s are formatted like their base value
@@ -3319,7 +3319,7 @@ if (is(DynamicArrayTypeOf!T) && !is(StringTypeOf!T) && !is(T == enum) && !hasToS
     {
         // Valid and printable (ASCII)
         formatTest( [cast(StrType)"hello"],
-                    `["hello"]` );
+                    `[hello]` );
 
         // 1 character escape sequences (' is not escaped in strings)
         formatTest( [cast(StrType)"\"'\0\\\a\b\f\n\r\t\v"],
@@ -3621,9 +3621,9 @@ if (is(StringTypeOf!T) && !is(T == enum))
     {
         try
         {
-            put(w, '\"');
+            //put(w, '\"');
             formatRange(w, str, f);
-            put(w, '\"');
+            //put(w, '\"');
             return;
         }
         catch (UTFException)
@@ -5491,8 +5491,8 @@ private void formatReflectTest(T)(ref T val, string fmt, string[] formatted, str
     void aaTest()
     {
         auto aa = [1:"hello", 2:"world"];
-        formatReflectTest(aa, "%s",                     [`[1:"hello", 2:"world"]`, `[2:"world", 1:"hello"]`]);
-        formatReflectTest(aa, "[%(%s->%s, %)]",         [`[1->"hello", 2->"world"]`, `[2->"world", 1->"hello"]`]);
+        formatReflectTest(aa, "%s",                     [`[1:hello, 2:world]`, `[2:world, 1:hello]`]);
+        formatReflectTest(aa, "[%(%s->%s, %)]",         [`[1->hello, 2->world]`, `[2->world, 1->hello]`]);
         formatReflectTest(aa, "{%([%s=%(%c%)]%|; %)}",  [`{[1=hello]; [2=world]}`, `{[2=world]; [1=hello]}`]);
     }
 
