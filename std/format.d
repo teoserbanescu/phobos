@@ -4228,7 +4228,7 @@ if (is(T == class) && !is(T == enum))
 
 // outside the unittest block, otherwise the FQN of the
 // class contains the line number of the unittest
-version (unittest)
+version (StdUnittest)
 {
     private class C {}
 }
@@ -4853,7 +4853,7 @@ private T getNth(string kind, alias Condition, T, A...)(uint index, A args)
 
 /* ======================== Unit Tests ====================================== */
 
-version (unittest)
+version (StdUnittest)
 private void formatTest(T)(T val, string expected, size_t ln = __LINE__, string fn = __FILE__)
 {
     import core.exception : AssertError;
@@ -4867,7 +4867,7 @@ private void formatTest(T)(T val, string expected, size_t ln = __LINE__, string 
             text("expected = `", expected, "`, result = `", w.data, "`"), fn, ln);
 }
 
-version (unittest)
+version (StdUnittest)
 private void formatTest(T)(string fmt, T val, string expected, size_t ln = __LINE__, string fn = __FILE__) @safe
 {
     import core.exception : AssertError;
@@ -4880,7 +4880,7 @@ private void formatTest(T)(string fmt, T val, string expected, size_t ln = __LIN
             text("expected = `", expected, "`, result = `", w.data, "`"), fn, ln);
 }
 
-version (unittest)
+version (StdUnittest)
 private void formatTest(T)(T val, string[] expected, size_t ln = __LINE__, string fn = __FILE__)
 {
     import core.exception : AssertError;
@@ -4898,7 +4898,7 @@ private void formatTest(T)(T val, string[] expected, size_t ln = __LINE__, strin
             text("expected one of `", expected, "`, result = `", w.data, "`"), fn, ln);
 }
 
-version (unittest)
+version (StdUnittest)
 private void formatTest(T)(string fmt, T val, string[] expected, size_t ln = __LINE__, string fn = __FILE__) @safe
 {
     import core.exception : AssertError;
@@ -5346,7 +5346,7 @@ here:
     assert(a == "hello" && b == 124 && c == 34.5);
 }
 
-version (unittest)
+version (StdUnittest)
 private void formatReflectTest(T)(ref T val, string fmt, string formatted, string fn = __FILE__, size_t ln = __LINE__)
 {
     import core.exception : AssertError;
@@ -5388,7 +5388,7 @@ private void formatReflectTest(T)(ref T val, string fmt, string formatted, strin
             input, fn, ln);
 }
 
-version (unittest)
+version (StdUnittest)
 private void formatReflectTest(T)(ref T val, string fmt, string[] formatted, string fn = __FILE__, size_t ln = __LINE__)
 {
     import core.exception : AssertError;
